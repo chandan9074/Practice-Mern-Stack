@@ -1,5 +1,6 @@
 const express = require("express");
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 
 const cors = require("cors");  
 
@@ -42,6 +43,16 @@ async function run() {
       const result = await userCollection.insertOne(data)
       console.log("here krishna", result);
       res.json(result)
+    })
+    
+    //delete api
+    app.delete('/users/:id', async (req, res)=>{
+      const userid = req.params.id;
+      const query = {_id: ObjectId(userid)};
+      const result = await userCollection.deleteOne(query);
+
+      res.json(result);
+
     })
 
   } finally {
