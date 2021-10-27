@@ -28,6 +28,13 @@ async function run() {
     // }
     // const result = await userCollection.insertOne(doc);
     // console.log(`A document was inserted with the _id: ${result.insertedId}`);
+
+    //get api
+    app.get('/users', async (req, res)=>{
+      const cursor = userCollection.find({});
+      const users = await cursor.toArray();
+      res.send(users)
+    })
     
     // post api
     app.post('/users', async (req, res)=>{
