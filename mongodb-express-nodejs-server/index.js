@@ -31,11 +31,14 @@ async function run() {
     
     // post api
     app.post('/users', async (req, res)=>{
-      console.log("here krishna", req.body);
+      const data = req.body;
+      const result = await userCollection.insertOne(data)
+      console.log("here krishna", result);
+      res.json(result)
     })
 
   } finally {
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
