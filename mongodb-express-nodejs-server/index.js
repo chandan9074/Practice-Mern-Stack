@@ -44,6 +44,15 @@ async function run() {
       console.log("here krishna", result);
       res.json(result)
     })
+
+    //update api
+    app.get("/users/:id", async (req, res)=>{
+      const id = req.params.id;
+      const query = {_id: ObjectId(id)};
+      const user = await userCollection.findOne(query)
+      // console.log(id)
+      res.send(user)
+    })
     
     //delete api
     app.delete('/users/:id', async (req, res)=>{
