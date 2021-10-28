@@ -23,12 +23,18 @@ async function run() {
 
     // get api
     app.get("/services", async (req, res)=>{
-        const service = req.body;
-        const result = await serviceCollection.insertOne(service);
-        console.log(result)
-        res.json(result)
+
+        // const query = { runtime: { $lt: 15 } };
+
+        const cursor = serviceCollection.find({});
+        const services = await cursor.toArray();
+        // const result = await serviceCollection.insertOne(service);
+        // console.log(result)
+        res.send(services)
         // console.log(req.body)
     })
+    
+    // single service get 
     
     //post api
     app.post("/services", async (req, res)=>{
